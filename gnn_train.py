@@ -256,7 +256,7 @@ def main():
     parser.add_argument('-n_epochs', type=int, default=50)
     parser.add_argument('-warmup_step', type=int, default=1000)
     parser.add_argument('-training_step', type=int, default=10000)
-    parser.add_argument('-use_gpu', type=bool, default=True)
+    parser.add_argument('-use_gpu', action='store_true', default=False)
     parser.add_argument('-schedule', type=str, default='linear')
     parser.add_argument('-seed', type=int, default=7)
 
