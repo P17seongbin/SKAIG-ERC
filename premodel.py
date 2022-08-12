@@ -63,31 +63,23 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     print(args)
-    
+
     if args.dataset == "IEMOCAP":
-        data1 = pickle.load(open('/data2/ljn/TRMSM/bert_data/IEMOCAP/IEMOCAP_data.pkl', 'rb'), encoding='utf-8')
-        train_data = data1['train']
-        test_data = data1['test']
-        train_utt = train_data[0]
-        test_utt = test_data[0]
+        data_path = '/data2/ljn/TRMSM/bert_data/IEMOCAP/IEMOCAP_data.pkl'
     elif args.dataset == "MELD":
-        data1 = pickle.load(open('/data2/ljn/TRMSM/bert_data/MELD/MELD_data.pkl', 'rb'), encoding='utf-8')
-        train_data, dev_data, test_data = data1[0], data1[1], data1[2]
-        train_utt = train_data[0]
-        dev_utt = dev_data[0]
-        test_utt = test_data[0]
+        data_path = '/data2/ljn/TRMSM/bert_data/MELD/MELD_data.pkl'
     elif args.dataset == "EmoryNLP":
-        data1 = pickle.load(open('/data2/ljn/TRMSM/bert_data/EmoryNLP/EmoryNLP_feature.pkl', 'rb'), encoding='utf-8')
-        train_data, dev_data, test_data = data1[0], data1[2], data1[1]
-        train_utt = train_data[0]
-        dev_utt = dev_data[0]
-        test_utt = test_data[0]
+        data_path = '/data2/ljn/TRMSM/bert_data/EmoryNLP/EmoryNLP_feature.pkl'
     elif args.dataset == "DailyDialog":
-        data1 = pickle.load(open('/data2/ljn/TRMSM/bert_data/DailyDialog/DailyDialog_feature.pkl', 'rb'), encoding='utf-8')
-        train_data, dev_data, test_data = data1[0], data1[1], data1[2]
-        train_utt = train_data[0]
-        dev_utt = dev_data[0]
-        test_utt = test_data[0]
+        data_path = '/data2/ljn/TRMSM/bert_data/DailyDialog/DailyDialog_feature.pkl'
+    else:
+        raise ValueError("Invalid dataset {}".format(args.dataset))
+
+    data1 = pickle.load(open(data_path, 'rb'), encoding='utf-8')
+    train_data, dev_data, test_data = data1[0], data1[1], data1[2]
+    train_utt = train_data[0]
+    dev_utt = dev_data[0]
+    test_utt = test_data[0]
 
     opt, state_dict = interactive.load_model_file(args.model_file)
 
